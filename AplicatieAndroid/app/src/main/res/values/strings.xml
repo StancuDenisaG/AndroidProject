@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AplicatieAndroid</string>
+    <string name="app_name">NotesApp</string>
+    <string name="LOGOUT">Logout</string>
+    <string name="PROFILE">Profile</string>
+    <string name="HOME">Home</string>
+    <string name="ADD">Add note</string>
 </resources>
