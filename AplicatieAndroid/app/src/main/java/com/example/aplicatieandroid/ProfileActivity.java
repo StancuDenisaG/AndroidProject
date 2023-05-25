@@ -98,9 +98,8 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    // The user is not signed in with Google
+
                     mAuth.signOut();
-                    // Save the login state as logged out
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean("isLoggedIn", false);
                     editor.putString("email", "");
@@ -113,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for delete profile button
+
         btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,17 +132,14 @@ public class ProfileActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        // Account deleted successfully
-                                                        // You can perform any necessary actions, such as navigating to a different activity or showing a success message
 
-                                                        // Delete user data from SharedPreferences
                                                         SharedPreferences sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
                                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                                         editor.remove("email");
                                                         editor.putBoolean("isLogged", false);
                                                         editor.apply();
 
-                                                        // Delete user's notes from the database
+
                                                         List<Note> userNotes =  database.mainDAO().getNotesByUserEmail(currentUserEmail);
                                                         for (Note note : userNotes) {
                                                             database.mainDAO().delete(note);
@@ -165,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // User cancelled the deletion
+
                                 dialog.dismiss();
                             }
                         })

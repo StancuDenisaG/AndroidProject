@@ -59,24 +59,30 @@ public class RegisterActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)){
             etRegEmail.setError("Email cannot be empty");
             etRegEmail.requestFocus();
-        }else if (TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)){
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
-        }else if (TextUtils.isEmpty(conf)) {
+        } else if (TextUtils.isEmpty(conf)) {
             etConfPassword.setError("Confirm password");
             etConfPassword.requestFocus();
-        }else if (!password.equals(conf)){
+        } else if (!password.equals(conf)){
             etConfPassword.setError("Incorrect password!");
             etConfPassword.requestFocus();
-        } else{
+        } else {
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        SharedPreferences preferences = getSharedPreferences("myPref", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("email", email);
+                        editor.putBoolean("isLoggedIn", true); // set isLoggedIn to true
+                        editor.apply();
 
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    }else{
+                        Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        finish(); // Finish the current activity
+                    } else {
                         Toast.makeText(RegisterActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
