@@ -61,13 +61,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check if the user is logged in
         SharedPreferences sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         boolean isLogged = sharedPref.getBoolean("isLoggedIn", false);
 
 
         if (!isLogged) {
-            // User is not logged in, navigate to the login page
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();

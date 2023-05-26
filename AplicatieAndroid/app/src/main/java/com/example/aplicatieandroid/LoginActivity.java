@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences preferences = getSharedPreferences("myPref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("email", email);
-                        editor.putBoolean("isLoggedIn", true); // set isLoggedIn to true
+                        editor.putBoolean("isLoggedIn", true);
                         editor.apply();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signInWithGoogle() {
+        mGoogleSignInClient.signOut();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -119,14 +120,12 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            // Signed in successfully, show authenticated UI.
-            //updateUI(account);
             if (account != null) {
                 String email = account.getEmail();
                 SharedPreferences preferences = getSharedPreferences("myPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("email", email);
-                editor.putBoolean("isLoggedIn", true); // set isLoggedIn to true
+                editor.putBoolean("isLoggedIn", true);
                 editor.apply();
             }
 

@@ -90,7 +90,6 @@ public class ProfileActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putBoolean("isLoggedIn", false);
                             editor.putString("email", "");
-                            editor.putString("password", "");
                             editor.apply();
                             Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                             startActivity(intent);
@@ -103,7 +102,6 @@ public class ProfileActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean("isLoggedIn", false);
                     editor.putString("email", "");
-                    editor.putString("password", "");
                     editor.apply();
                     Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -136,7 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                         SharedPreferences sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
                                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                                         editor.remove("email");
-                                                        editor.putBoolean("isLogged", false);
+                                                        editor.putBoolean("isLoggedIn", false);
                                                         editor.apply();
 
 
